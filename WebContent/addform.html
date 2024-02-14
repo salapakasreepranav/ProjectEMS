@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body bgcolor="lightblue">
+		<form method="post" action="./controller/addEmployee">
+			<table align='center'>
+				<tr>
+					<th>Name</th>
+					<td><input type="text" name='name' required/></td>
+				</tr>
+				<tr>
+					<th>DOB</th>
+					<td><input type="date" name='dob' required/></td>
+				</tr>
+				<tr>				
+					<th>Gender</th>
+					<td><input type="radio" name="gender" value="Male" required>Male
+					<input type="radio" name="gender" value="Female" required>
+					Female</td>
+				</tr>
+				<tr>
+					<th>Location</th>
+					<td><input type="text" name='location' required/></td>
+				</tr>
+				<tr>
+					<th>Salary</th>
+					<td><input type="number" name='salary' required/></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value='Add' /></td>
+				</tr>
+			</table>
+		</form>
+
+</body>
+</html>
