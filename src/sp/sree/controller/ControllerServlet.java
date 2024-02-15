@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.zip.InflaterOutputStream;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,7 +45,7 @@ public class ControllerServlet extends HttpServlet
 		}
 	}
 	
-	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ParseException, IOException
+	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ParseException, IOException, ServletException
 	{
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
@@ -65,9 +66,16 @@ public class ControllerServlet extends HttpServlet
 			
 			out.print("<body bgcolor=\"lightblue\">");
 			if(!message.toLowerCase().startsWith("failed"))
+			{
+				//since it is dynamic, we are not sending to html
 				out.print("<h1>Employee Added Successfully </h1><br><h1>Employee ID: " + message + "</h1>");
+			}
 			else
-				out.print("<h1>" + message + "</h1>");
+			{
+				RequestDispatcher rd = request.getRequestDispatcher("/regFail.html");
+				rd.forward(request, response);
+			}
+				
 			out.print("</body >");
 			
 			out.close();
@@ -137,7 +145,10 @@ public class ControllerServlet extends HttpServlet
 			else if(statusMessage.equalsIgnoreCase("No Employee Found"))
 				out.println("<h1>" + "No Employee Found with ID: " + eid + "</h1>");
 			else
-				out.println("<h1>" + "Employee Deleted Successfully" + "</h1>");
+			{
+				RequestDispatcher rd = request.getRequestDispatcher("/delSuccess.html");
+				rd.forward(request, response);
+			}
 			out.print("</body >");
 		}
 		
@@ -285,9 +296,8 @@ public class ControllerServlet extends HttpServlet
 			}	
 			else
 			{
-				out.print("<body bgcolor=\"lightblue\">");
-				out.print("<h1>Employee Details Updated Sunccessfully</h1>");
-				out.print("</body >");
+				RequestDispatcher rd = request.getRequestDispatcher("/updateSuccess.html");
+				rd.forward(request, response);
 			}
 			
 			out.close();
